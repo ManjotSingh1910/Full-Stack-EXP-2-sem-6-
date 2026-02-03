@@ -1,13 +1,24 @@
-import Grid from '@mui/material/Grid'
+import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
-import { FC } from 'react'
+import type { FC } from 'react'
 
 const formatNumber = (n: number) => n.toLocaleString()
 
+// Pure, deterministic pseudo-random generator based on a string seed.
+// This avoids calling impure functions like Math.random() during render.
+const seededRandom = (seed: string) => {
+  let h = 2166136261 >>> 0
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i)
+    h = Math.imul(h, 16777619)
+  }
+  return (h >>> 0) / 4294967295
+}
+
 const PlaceholderCard = ({ title, max = 10000 }: { title: string; max?: number }) => {
-  const value = Math.floor(Math.random() * max) + 1
-  const change = (Math.random() * 10 - 5).toFixed(1) // -5.0 .. +5.0
+  const value = Math.floor(seededRandom(`${title}:${max}`) * max) + 1
+  const change = (seededRandom(`${title}:change`) * 10 - 5).toFixed(1)
   const positive = Number(change) >= 0
 
   return (
@@ -30,20 +41,21 @@ const PlaceholderCard = ({ title, max = 10000 }: { title: string; max?: number }
 const Dashboard: FC = () => {
   return (
     <Grid container spacing={2}>
-      <Grid item xs={12} md={6} lg={3}>
+      {/* FIX 2: Added 'item' back because standard Grid requires it */}
+      <Grid xs={12} md={6} lg={3}>
         <PlaceholderCard title="Users" max={12000} />
       </Grid>
-      <Grid item xs={12} md={6} lg={3}>
+      <Grid xs={12} md={6} lg={3}>
         <PlaceholderCard title="Revenue" max={250000} />
       </Grid>
-      <Grid item xs={12} md={6} lg={3}>
+      <Grid xs={12} md={6} lg={3}>
         <PlaceholderCard title="Conversions" max={2000} />
       </Grid>
-      <Grid item xs={12} md={6} lg={3}>
+      <Grid xs={12} md={6} lg={3}>
         <PlaceholderCard title="Uptime (hrs)" max={168} />
       </Grid>
 
-      <Grid item xs={12}>
+      <Grid xs={12}>
         <Paper sx={{ p: 2 }} elevation={2}>
           <Typography variant="h6">Activity Feed</Typography>
           <Typography variant="body2" sx={{ mt: 1 }}>

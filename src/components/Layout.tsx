@@ -1,4 +1,4 @@
-import { FC, ReactNode, useState } from 'react'
+import { type FC, type ReactNode, useState } from 'react'
 import Box from '@mui/material/Box'
 import Topbar from './Topbar'
 import Sidebar from './Sidebar'

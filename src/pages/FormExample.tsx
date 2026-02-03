@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import type { FC } from 'react' // FIX 1: Added "type" keyword
 import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -19,7 +19,8 @@ type FormValues = {
 }
 
 const FormExample: FC = () => {
-  const { control, handleSubmit, formState } = useForm<FormValues>({
+  // FIX 2: Removed "formState" from here since it was unused
+  const { control, handleSubmit } = useForm<FormValues>({
     resolver: yupResolver(schema),
     defaultValues: { name: '', email: '' },
   })
