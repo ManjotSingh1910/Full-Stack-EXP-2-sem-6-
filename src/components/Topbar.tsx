@@ -3,13 +3,13 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
-import { FC } from 'react'
+import React from 'react'
 
 interface TopbarProps {
   onMenuClick?: () => void
 }
 
-const Topbar: FC<TopbarProps> = ({ onMenuClick }) => {
+const Topbar: React.FC<TopbarProps> = ({ onMenuClick }) => {
   return (
     <AppBar position="static" color="primary">
       <Toolbar>

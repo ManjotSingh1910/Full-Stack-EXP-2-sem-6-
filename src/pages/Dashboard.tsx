@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import type { FC } from 'react'
@@ -40,30 +40,21 @@ const PlaceholderCard = ({ title, max = 10000 }: { title: string; max?: number }
 
 const Dashboard: FC = () => {
   return (
-    <Grid container spacing={2}>
-      {/* FIX 2: Added 'item' back because standard Grid requires it */}
-      <Grid xs={12} md={6} lg={3}>
-        <PlaceholderCard title="Users" max={12000} />
-      </Grid>
-      <Grid xs={12} md={6} lg={3}>
-        <PlaceholderCard title="Revenue" max={250000} />
-      </Grid>
-      <Grid xs={12} md={6} lg={3}>
-        <PlaceholderCard title="Conversions" max={2000} />
-      </Grid>
-      <Grid xs={12} md={6} lg={3}>
-        <PlaceholderCard title="Uptime (hrs)" max={168} />
-      </Grid>
+    <Box sx={{ display: 'grid', gap: 2, gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' } }}>
+      <PlaceholderCard title="Users" max={12000} />
+      <PlaceholderCard title="Revenue" max={250000} />
+      <PlaceholderCard title="Conversions" max={2000} />
+      <PlaceholderCard title="Uptime (hrs)" max={168} />
 
-      <Grid xs={12}>
+      <Box sx={{ gridColumn: '1 / -1' }}>
         <Paper sx={{ p: 2 }} elevation={2}>
           <Typography variant="h6">Activity Feed</Typography>
           <Typography variant="body2" sx={{ mt: 1 }}>
             Recent events and logs go here.
           </Typography>
         </Paper>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   )
 }
 

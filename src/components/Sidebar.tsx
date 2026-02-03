@@ -13,14 +13,14 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import Collapse from '@mui/material/Collapse'
 import Divider from '@mui/material/Divider'
-import { FC, useState } from 'react'
+import React, { useState } from 'react'
 
 interface SidebarProps {
   open: boolean
   onNavigate: (page: string) => void
 }
 
-const Sidebar: FC<SidebarProps> = ({ open, onNavigate }) => {
+const Sidebar: React.FC<SidebarProps> = ({ open, onNavigate }) => {
   const [managementOpen, setManagementOpen] = useState(false)
 
   return (
